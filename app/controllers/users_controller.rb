@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       flash[:success] = "User created"
       redirect_to @user
     else
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -32,14 +32,14 @@ class UsersController < ApplicationController
       flash[:success] = "User updated"
       redirect_to @user
     else
-      render 'edit'
+      render 'edit', status: :unprocessable_entity
     end
   end
 
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
-    redirect_to users_url
+    redirect_to users_url, status: :see_other
   end
 
   private
